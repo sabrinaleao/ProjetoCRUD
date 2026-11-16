@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Produtos</title>
+    <link rel="stylesheet" th:href="@{/css/estilo.css}">
+</head>
+<body>
+<div class="container">
+    <h1>Produtos</h1>
+
+    <div class="barra">
+        <form th:action="@{/produtos}" method="get" class="busca">
+            <input type="text" name="busca" th:value="${busca}" placeholder="Buscar por nome...">
+            <button type="submit" class="btn">Buscar</button>
+        </form>
+        <a th:href="@{/produtos/novo}" class="btn btn-principal">+ Novo produto</a>
+    </div>
+
+    <table>
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Nome</th>
+            <th>Preço</th>
+            <th>Estoque</th>
+            <th>Ações</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="p : ${produtos}">
+            <td th:text="${p.id}">1</td>
+            <td th:text="${p.nome}">Nome</td>
+            <td th:text="${#numbers.formatDecimal(p.preco, 1, 'POINT', 2, 'COMMA')}">0,00</td>
+            <td th:text="${p.estoque}">0</td>
+            <td>
+                <a th:href="@{/produtos/editar/{id}(id=${p.id})}" class="btn">Editar</a>
+                <a th:href="@{/produtos/excluir/{id}(id=${p.id})}" class="btn btn-perigo"
+                   onclick="return confirm('Deseja excluir este produto?')">Excluir</a>
+            </td>
+        </tr>
+        <tr th:if="${#lists.isEmpty(produtos)}">
+            <td colspan="5" class="vazio">Nenhum produto cadastrado.</td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>
