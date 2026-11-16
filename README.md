@@ -10,3 +10,5 @@ Atividade prática UMC. Tema: **Produto** (nome, preço, estoque).
 4. Confira os dados em http://localhost/phpmyadmin
 
 Se o seu MySQL tiver senha, defina a variável de ambiente `DB_PASSWORD` (a senha não fica no código).
+
+Sabrina Leão 11251101771
